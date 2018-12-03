@@ -22,11 +22,11 @@ ALTER SCHEMA `kursova`  DEFAULT COLLATE utf8_unicode_ci ;
 -- Table `kursova`.`Users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `kursova`.`Users` (
-  `idUsers` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `idUser` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `login` VARCHAR(45) NOT NULL UNIQUE,
   `passworldHash` VARCHAR(100) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idUsers`)
+  PRIMARY KEY (`idUser`)
   ) ENGINE = InnoDB
 	PACK_KEYS = DEFAULT;
 
@@ -37,9 +37,9 @@ CREATE TABLE IF NOT EXISTS `kursova`.`Users` (
 CREATE TABLE IF NOT EXISTS `kursova`.`Video` (
   `idVideo` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(200) NOT NULL,
-  `duration` TIME NULL,
+  `duration` TIME NOT NULL DEFALT "00:00:00",
   `rating` TINYINT(4) NOT NULL DEFAULT 5 CHECK(`rating` >= 1 AND `rating` <= 10),
-  `url` VARCHAR(200) NULL,
+  `url` VARCHAR(200) NOT NULL DEFALT "",
   PRIMARY KEY (`idVideo`)
   ) ENGINE = InnoDB;
 
@@ -48,10 +48,10 @@ CREATE TABLE IF NOT EXISTS `kursova`.`Video` (
 -- Table `kursova`.`Groups`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `kursova`.`Groups` (
-  `idGroups` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idGroup` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(80) NOT NULL,
   `type` CHAR(1) NOT NULL,
-  PRIMARY KEY (`idGroups`),
+  PRIMARY KEY (`idGroup`),
   CONSTRAINT `typeGroup` CHECK(`type` IN ('y', 'g', 'd', 'a', 'o')) # year, genre, director, actor, other
   ) ENGINE = InnoDB;
 
@@ -59,18 +59,18 @@ CREATE TABLE IF NOT EXISTS `kursova`.`Groups` (
 -- -----------------------------------------------------
 -- Table `kursova`.`Users_has_Video`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `kursova`.`Users_has_Video` (
-  `Users_idUsers` INT UNSIGNED NOT NULL,
-  `Video_idVideo` INT UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `kursova`.`UsersHasVideo` (
+  `idUser` INT UNSIGNED NOT NULL,
+  `idVideo` INT UNSIGNED NOT NULL,
   `status` CHAR(1) NOT NULL,
-  PRIMARY KEY (`Users_idUsers`, `Video_idVideo`),
-  INDEX `fk_Users_has_Video_Video1_idx` (`Video_idVideo` ASC),
-  INDEX `fk_Users_has_Video_Users_idx` (`Users_idUsers` ASC),
-  CONSTRAINT `fk_Users_has_Video_Users`
-    FOREIGN KEY (`Users_idUsers`)
-    REFERENCES `kursova`.`Users` (`idUsers`),
-  CONSTRAINT `fk_Users_has_Video_Video1`
-    FOREIGN KEY (`Video_idVideo`)
+  PRIMARY KEY (`idUser`, `idVideo`),
+  INDEX `fk_idVideo` (`idVideo` ASC),
+  INDEX `fk_idUser` (`idUser` ASC),
+  CONSTRAINT `fk_idVideo`
+    FOREIGN KEY (`idUser`)
+    REFERENCES `kursova`.`Users` (`idUser`),
+  CONSTRAINT `fk_idVideo`
+    FOREIGN KEY (`idVideo`)
     REFERENCES `kursova`.`Video` (`idVideo`),
     CONSTRAINT `typeStatus` CHECK(`status` IN ('c', 'h', 's')) #completed, happens, scheduled
 ) ENGINE = InnoDB;
@@ -79,27 +79,27 @@ CREATE TABLE IF NOT EXISTS `kursova`.`Users_has_Video` (
 -- -----------------------------------------------------
 -- Table `kursova`.`Video_has_Groups`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `kursova`.`Video_has_Groups` (
-  `Video_idVideo` INT UNSIGNED NOT NULL,
-  `Groups_idGroups` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`Video_idVideo`, `Groups_idGroups`),
-  INDEX `fk_Video_has_Groups_Groups1_idx` (`Groups_idGroups` ASC),
-  INDEX `fk_Video_has_Groups_Video1_idx` (`Video_idVideo` ASC),
-  CONSTRAINT `fk_Video_has_Groups_Video1`
-    FOREIGN KEY (`Video_idVideo`)
+CREATE TABLE IF NOT EXISTS `kursova`.`VideoHasGroups` (
+  `idVideo` INT UNSIGNED NOT NULL,
+  `idGroup` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`idVideo`, `idGroup`),
+  INDEX `fk_idGroup` (`idGroup` ASC),
+  INDEX `fk_idVideo` (`idVideo` ASC),
+  CONSTRAINT `fk_idVideo`
+    FOREIGN KEY (`idVideo`)
     REFERENCES `kursova`.`Video` (`idVideo`),
-  CONSTRAINT `fk_Video_has_Groups_Groups1`
-    FOREIGN KEY (`Groups_idGroups`)
-    REFERENCES `kursova`.`Groups` (`idGroups`)
+  CONSTRAINT `fk_idGroup`
+    FOREIGN KEY (`idGroup`)
+    REFERENCES `kursova`.`Groups` (`idGroup`)
     ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `kursova`.`log` (
+CREATE TABLE IF NOT EXISTS `kursova`.`Log` (
   `idLog` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `logMessage` VARCHAR(200) NOT NULL,
-  `tableName` VARCHAR(20),
+  `tableName` VARCHAR(20) NOT NULL,
   `idRowsTable` INT UNSIGNED NOT NULL,
-  `actionType` CHAR(1) CHECK (`actionType` IN ('i', 'u', 'd')), # insert, update, delete
-  `time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `actionType` CHAR(1) CHECK (`actionType` IN ('i', 'u', 'd')) NOT NULL, # insert, update, delete
+  `time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idLog`)
 ) ENGINE = InnoDB;
 
