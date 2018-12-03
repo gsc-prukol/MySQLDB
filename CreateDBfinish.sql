@@ -32,14 +32,14 @@ CREATE TABLE IF NOT EXISTS `kursova`.`Users` (
 
 
 -- -----------------------------------------------------
--- Table `kursova`.`Video`
+-- Table `kursova`.`Videos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `kursova`.`Video` (
+CREATE TABLE IF NOT EXISTS `kursova`.`Videos` (
   `idVideo` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(200) NOT NULL,
-  `duration` TIME NOT NULL DEFALT "00:00:00",
+  `duration` TIME NOT NULL DEFAULT "00:00:00",
   `rating` TINYINT(4) NOT NULL DEFAULT 5 CHECK(`rating` >= 1 AND `rating` <= 10),
-  `url` VARCHAR(200) NOT NULL DEFALT "",
+  `url` VARCHAR(200) NOT NULL DEFAULT "",
   PRIMARY KEY (`idVideo`)
   ) ENGINE = InnoDB;
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `kursova`.`UsersHasVideo` (
     REFERENCES `kursova`.`Users` (`idUser`),
   CONSTRAINT `fk_idVideo`
     FOREIGN KEY (`idVideo`)
-    REFERENCES `kursova`.`Video` (`idVideo`),
+    REFERENCES `kursova`.`Videos` (`idVideo`),
     CONSTRAINT `typeStatus` CHECK(`status` IN ('c', 'h', 's')) #completed, happens, scheduled
 ) ENGINE = InnoDB;
 
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `kursova`.`VideoHasGroups` (
   INDEX `fk_idVideo` (`idVideo` ASC),
   CONSTRAINT `fk_idVideo`
     FOREIGN KEY (`idVideo`)
-    REFERENCES `kursova`.`Video` (`idVideo`),
+    REFERENCES `kursova`.`Videos` (`idVideo`),
   CONSTRAINT `fk_idGroup`
     FOREIGN KEY (`idGroup`)
     REFERENCES `kursova`.`Groups` (`idGroup`)
