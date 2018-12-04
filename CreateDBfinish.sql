@@ -27,7 +27,7 @@ ALTER SCHEMA `kursova`  DEFAULT COLLATE utf8_unicode_ci ;
 -- -----------------------------------------------------
 -- Table `kursova`.`Users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `kursova`.`Users` (
+CREATE TABLE IF NOT EXISTS `Users` (
   `idUser` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `login` VARCHAR(45) NOT NULL UNIQUE,
   `passwordHash` VARCHAR(100) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `kursova`.`Users` (
 -- -----------------------------------------------------
 -- Table `kursova`.`Videos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `kursova`.`Videos` (
+CREATE TABLE IF NOT EXISTS `Videos` (
   `idVideo` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(200) NOT NULL,
   `duration` TIME NOT NULL DEFAULT "00:00:00",
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `kursova`.`Videos` (
 -- -----------------------------------------------------
 -- Table `kursova`.`Groups`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `kursova`.`Groups` (
+CREATE TABLE IF NOT EXISTS `Groups` (
   `idGroup` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(80) NOT NULL,
   `type` CHAR(1) NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `kursova`.`Groups` (
 -- -----------------------------------------------------
 -- Table `kursova`.`Users_has_Video`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `kursova`.`UsersHasVideo` (
+CREATE TABLE IF NOT EXISTS `UsersHasVideo` (
   `idUser` INT UNSIGNED NOT NULL,
   `idVideo` INT UNSIGNED NOT NULL,
   `status` CHAR(1) NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `kursova`.`UsersHasVideo` (
 -- -----------------------------------------------------
 -- Table `kursova`.`Video_has_Groups`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `kursova`.`VideoHasGroups` (
+CREATE TABLE IF NOT EXISTS `VideoHasGroups` (
   `idVideo` INT UNSIGNED NOT NULL,
   `idGroup` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`idVideo`, `idGroup`),
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `kursova`.`VideoHasGroups` (
     REFERENCES `kursova`.`Groups` (`idGroup`)
     ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `kursova`.`Log` (
+CREATE TABLE IF NOT EXISTS `Log` (
   `idLog` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `logMessage` VARCHAR(200) NOT NULL,
   `tableName` VARCHAR(20) NOT NULL,
