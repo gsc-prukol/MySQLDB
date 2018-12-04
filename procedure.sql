@@ -116,7 +116,6 @@ END //
 
 
 
-
 CREATE PROCEDURE insertGroup(IN pname CHAR(80),
                              IN ptype CHAR(1))
 BEGIN
@@ -130,6 +129,22 @@ CREATE PROCEDURE updateGroup(IN id INT UNSIGNED,
 BEGIN
     UPDATE Groups
     SET name = pname, type = ptype
+    WHERE idVideo = id;
+END //
+
+CREATE PROCEDURE updateGroupName(IN id INT UNSIGNED,
+                             IN pname CHAR(80))
+BEGIN
+    UPDATE Groups
+    SET name = pname
+    WHERE idVideo = id;
+END //
+
+CREATE PROCEDURE updateGroup(IN id INT UNSIGNED,
+                             IN ptype CHAR(1))
+BEGIN
+    UPDATE Groups
+    SET type = ptype
     WHERE idVideo = id;
 END //
 
