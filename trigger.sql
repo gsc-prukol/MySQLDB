@@ -1,4 +1,4 @@
-USE kursova;
+USE kursova1;
 DELIMITER //
 
 CREATE TRIGGER video_AFTER_INSERT AFTER INSERT ON Videos 
@@ -26,42 +26,42 @@ CREATE TRIGGER user_AFTER_INSERT AFTER INSERT ON Users
 FOR EACH ROW
 BEGIN
 INSERT INTO Log(tableName, actionType,idRowsTable,  logMessage)
-VALUES('Users', 'i', NEW.idUsers, NEW.login);
+VALUES('Users', 'i', NEW.idUser, NEW.login);
 END //
 
 CREATE TRIGGER user_AFTER_UPDATE AFTER UPDATE ON Users
 FOR EACH ROW
 BEGIN
 INSERT INTO Log(tableName, actionType,idRowsTable,  logMessage)
-VALUES('Users', 'u', NEW.idUsers, NEW.login);
+VALUES('Users', 'u', NEW.idUser, NEW.login);
 END //
 
 CREATE TRIGGER user_AFTER_DELETE AFTER DELETE ON Users 
 FOR EACH ROW
 BEGIN
 INSERT INTO Log(tableName, actionType,idRowsTable,  logMessage)
-VALUES('Users', 'd', OLD.idUsers, OLD.login);
+VALUES('Users', 'd', OLD.idUser, OLD.login);
 END //
 
 CREATE TRIGGER group_AFTER_INSERT AFTER INSERT ON Groups
 FOR EACH ROW
 BEGIN
 INSERT INTO Log(tableName, actionType,idRowsTable,  logMessage)
-VALUES('Groups', 'i', NEW.idGroups, NEW.name);
+VALUES('Groups', 'i', NEW.idGroup, NEW.name);
 END //
 
 CREATE TRIGGER group_AFTER_UPDATE AFTER UPDATE ON Groups
 FOR EACH ROW
 BEGIN
 INSERT INTO Log(tableName, actionType,idRowsTable,  logMessage)
-VALUES('Groups', 'u', NEW.idGroups, NEW.name);
+VALUES('Groups', 'u', NEW.idGroup, NEW.name);
 END //
 
 CREATE TRIGGER group_AFTER_DELETE AFTER DELETE ON Groups
 FOR EACH ROW
 BEGIN
 INSERT INTO Log(tableName, actionType,idRowsTable,  logMessage)
-VALUES('Groups', 'd', OLD.idGroups, OLD.name);
+VALUES('Groups', 'd', OLD.idGroup, OLD.name);
 END //
 
 
@@ -69,7 +69,7 @@ END //
 CREATE TRIGGER group_BEFORE_UPDATE BEFORE UPDATE ON Groups
 FOR EACH ROW
 BEGIN
-SET NEW.idGroups = OLD.idGroups;
+SET NEW.idGroup = OLD.idGroup;
 END //
 
 CREATE TRIGGER user_BEFORE_UPDATE BEFORE UPDATE ON Users

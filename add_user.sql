@@ -1,3 +1,2 @@
-use kursova;
-INSERT INTO Users(login, passwordhash, name)
-VALUES('gsc_prukol', 'qwerty', 'Вова');
+use kursova1;
+CALL insertUser('gsc_prukol', 'qwerty', 'Вова');

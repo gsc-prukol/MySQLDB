@@ -14,9 +14,9 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema kursova
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `kursova` DEFAULT CHARACTER SET utf8;
-USE `kursova` ;
-ALTER SCHEMA `kursova`  DEFAULT COLLATE utf8_unicode_ci ;
+CREATE SCHEMA IF NOT EXISTS `kursova1` DEFAULT CHARACTER SET utf8;
+USE `kursova1` ;
+ALTER SCHEMA `kursova1`  DEFAULT COLLATE utf8_unicode_ci ;
 
 -- -----------------------------------------------------
 -- Table `kursova`.`Users`
@@ -66,12 +66,12 @@ CREATE TABLE IF NOT EXISTS `UsersHasVideo` (
   PRIMARY KEY (`idUser`, `idVideo`),
   INDEX `fk_idVideo` (`idVideo` ASC),
   INDEX `fk_idUser` (`idUser` ASC),
-  CONSTRAINT `fk_idVideo`
+  CONSTRAINT `fk_idUserUHV`
     FOREIGN KEY (`idUser`)
-    REFERENCES `kursova`.`Users` (`idUser`),
-  CONSTRAINT `fk_idVideo`
+    REFERENCES `Users` (`idUser`),
+  CONSTRAINT `fk_idVideoUHV`
     FOREIGN KEY (`idVideo`)
-    REFERENCES `kursova`.`Videos` (`idVideo`),
+    REFERENCES `Videos` (`idVideo`),
     CONSTRAINT `typeStatus` CHECK(`status` IN ('c', 'h', 's')) #completed, happens, scheduled
 ) ENGINE = InnoDB;
 
@@ -85,12 +85,12 @@ CREATE TABLE IF NOT EXISTS `VideoHasGroups` (
   PRIMARY KEY (`idVideo`, `idGroup`),
   INDEX `fk_idGroup` (`idGroup` ASC),
   INDEX `fk_idVideo` (`idVideo` ASC),
-  CONSTRAINT `fk_idVideo`
+  CONSTRAINT `fk_idVideoVHG`
     FOREIGN KEY (`idVideo`)
-    REFERENCES `kursova`.`Videos` (`idVideo`),
-  CONSTRAINT `fk_idGroup`
+    REFERENCES `Videos` (`idVideo`),
+  CONSTRAINT `fk_idGroupVHG`
     FOREIGN KEY (`idGroup`)
-    REFERENCES `kursova`.`Groups` (`idGroup`)
+    REFERENCES `Groups` (`idGroup`)
     ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Log` (
@@ -98,8 +98,8 @@ CREATE TABLE IF NOT EXISTS `Log` (
   `logMessage` VARCHAR(200) NOT NULL,
   `tableName` VARCHAR(20) NOT NULL,
   `idRowsTable` INT UNSIGNED NOT NULL,
-  `actionType` CHAR(1) CHECK (`actionType` IN ('i', 'u', 'd')) NOT NULL, # insert, update, delete
-  `time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `actionType` CHAR(1) NOT NULL CHECK (`actionType` IN ('i', 'u', 'd')) , /*# insert, update, delete*/
+  `time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idLog`)
 ) ENGINE = InnoDB;
 

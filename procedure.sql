@@ -1,4 +1,4 @@
-USE kursova;
+USE kursova1;
 delimiter //
 
 CREATE PROCEDURE deleteOldLog(IN sTime DATETIME )
@@ -6,7 +6,6 @@ BEGIN
     DELETE FROM log
     WHERE time <= sTime;
 END //
-
 
 
 CREATE PROCEDURE insertUser(IN plogin varchar(45),
@@ -56,10 +55,12 @@ BEGIN
     DELETE FROM Users
     WHERE idUser = id;
 END //
+
+
 CREATE PROCEDURE insertVideo(IN pname varchar(200),
-                             IN pduration TIME DEFAULT "00:00:00",
-                             IN prating TINYINT(4)  DEFAULT 5,
-                             IN purl VARCHAR(200)  DEFAULT "")
+                             IN pduration TIME,
+                             IN prating TINYINT(4),
+                             IN purl VARCHAR(200))
 BEGIN
     INSERT INTO Videos (name, duration, rating, url)
     VALUE(pname, pduration, prating, purl);
@@ -67,9 +68,9 @@ END //
 
 CREATE PROCEDURE updateVideo(IN id INT UNSIGNED,
                              IN pname varchar(200),
-                             IN pduration TIME DEFAULT "00:00:00",
-                             IN prating TINYINT(4)  DEFAULT 5,
-                             IN purl VARCHAR(200)  DEFAULT "")
+                             IN pduration TIME,
+                             IN prating TINYINT(4),
+                             IN purl VARCHAR(200))
 BEGIN
     UPDATE Videos 
     SET name = pname, duration = pduration, rating = prating, url = purl
@@ -85,7 +86,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE updateVideoDuration(IN id INT UNSIGNED,
-                                     IN pduration TIME DEFAULT "00:00:00")
+                                     IN pduration TIME)
 BEGIN
     UPDATE Videos 
     SET duration = pduration
@@ -93,7 +94,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE updateVideoRating(IN id INT UNSIGNED,
-                             IN prating TINYINT(4)  DEFAULT 5)
+                             IN prating TINYINT(4))
 BEGIN
     UPDATE Videos 
     SET rating = prating
@@ -101,7 +102,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE updateVideoUrl(IN id INT UNSIGNED,
-                             IN purl VARCHAR(200)  DEFAULT "")
+                             IN purl VARCHAR(200))
 BEGIN
     UPDATE Videos 
     SET url = purl
@@ -113,7 +114,6 @@ BEGIN
     DELETE FROM Videos
     WHERE idVideo = id;
 END //
-
 
 
 CREATE PROCEDURE insertGroup(IN pname CHAR(80),
@@ -140,7 +140,7 @@ BEGIN
     WHERE idVideo = id;
 END //
 
-CREATE PROCEDURE updateGroup(IN id INT UNSIGNED,
+CREATE PROCEDURE updateGroupType(IN id INT UNSIGNED,
                              IN ptype CHAR(1))
 BEGIN
     UPDATE Groups
@@ -148,7 +148,7 @@ BEGIN
     WHERE idVideo = id;
 END //
 
-CREATE PROCEDURE deleteGroups(IN id INT UNSIGNED)
+CREATE PROCEDURE deleteGroup(IN id INT UNSIGNED)
 BEGIN
     DELETE FROM Groups
     WHERE idGroup = id;
