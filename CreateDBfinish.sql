@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `Log` (
   `logMessage` VARCHAR(200) NOT NULL,
   `tableName` VARCHAR(20) NOT NULL,
   `idRowsTable` INT UNSIGNED NOT NULL,
-  `actionType` CHAR(1) NOT NULL CHECK (`actionType` IN ('i', 'u', 'd')) , /*# insert, update, delete*/
+  `actionType` CHAR(1) NOT NULL CHECK (`actionType` IN ('i', 'u', 'd')) , # insert, update, delete
   `time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idLog`)
 ) ENGINE = InnoDB;

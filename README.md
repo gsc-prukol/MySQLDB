@@ -1,5 +1,6 @@
 # MySQLDB
 About CHECK in tables database
+==============================================================================================
 TABLE `Groups` 
 `typeGroup` CHECK(`type` IN ('y', 'g', 'd', 'a', 'o')) # year, genre, director, actor, other
 
