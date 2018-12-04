@@ -65,6 +65,18 @@ BEGIN
     VALUE(pname, ptype);
 END //
 
+CREATE PROCEDURE updateGroup(IN id INT UNSIGNED,
+                             IN pname CHAR(80),
+                             IN ptype CHAR(1))
+BEGIN
+    UPDATE Groups
+    SET name = pname, type = ptype
+    WHERE idVideo = id;
+END //
 
-
+CREATE PROCEDURE deleteGroups(IN id INT UNSIGNED)
+BEGIN
+    DELETE FROM Groups
+    WHERE idGroup = id;
+END //
 delimiter ;
