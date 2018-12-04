@@ -8,6 +8,7 @@ BEGIN
 END //
 
 
+
 CREATE PROCEDURE insertUser(IN plogin varchar(45),
                             IN ppasswordHash VARCHAR(100),
                             IN pname VARCHAR(45))
@@ -23,6 +24,30 @@ CREATE PROCEDURE updateUser(IN id INT UNSIGNED,
 BEGIN 
     UPDATE Users
     SET login = plogin, ppasswordHash = passwordHash, name = pname
+    WHERE idUser = id;
+END //
+
+CREATE PROCEDURE updateUserLogin(IN id INT UNSIGNED, 
+                            IN plogin varchar(45))
+BEGIN 
+    UPDATE Users
+    SET login = plogin
+    WHERE idUser = id;
+END //
+
+CREATE PROCEDURE updateUserPasswordHash(IN id INT UNSIGNED, 
+                            IN ppasswordHash VARCHAR(100))
+BEGIN 
+    UPDATE Users
+    SET passwordHash = passwordHash
+    WHERE idUser = id;
+END //
+
+CREATE PROCEDURE updateUserName(IN id INT UNSIGNED, 
+                            IN pname VARCHAR(45) )
+BEGIN 
+    UPDATE Users
+    SET name = pname
     WHERE idUser = id;
 END //
 
@@ -57,6 +82,9 @@ BEGIN
     DELETE FROM Videos
     WHERE idVideo = id;
 END //
+
+
+
 
 CREATE PROCEDURE insertGroup(IN pname CHAR(80),
                              IN ptype CHAR(1))
