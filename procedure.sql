@@ -153,4 +153,13 @@ BEGIN
     DELETE FROM Groups
     WHERE idGroup = id;
 END //
+
+#################################################################
+CREATE PROCEDURE addVideoUser(IN sidUser INT UNSIGNED, 
+                              IN sidVideo INT UNSIGNED,
+                              IN sstatus CHAR(1))
+BEGIN
+    INSERT INTO UsersHasVideo(idUser, idVideo, status)
+    VALUES(sidUsers, sidVideo, sstatus);
+END //
 delimiter ;
