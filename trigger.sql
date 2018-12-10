@@ -1,4 +1,4 @@
-USE kursova1;
+USE kursova2;
 DELIMITER //
 
 CREATE TRIGGER video_AFTER_INSERT AFTER INSERT ON Videos 

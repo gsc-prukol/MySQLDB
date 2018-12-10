@@ -1,4 +1,4 @@
-USE kursova1;
+USE kursova2;
 delimiter //
 
 CREATE PROCEDURE deleteOldLog(IN sTime DATETIME )

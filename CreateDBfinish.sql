@@ -14,9 +14,9 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema kursova
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `kursova1` DEFAULT CHARACTER SET utf8;
-USE `kursova1` ;
-ALTER SCHEMA `kursova1`  DEFAULT COLLATE utf8_unicode_ci ;
+CREATE SCHEMA IF NOT EXISTS `kursova2` DEFAULT CHARACTER SET utf8;
+USE `kursova2` ;
+ALTER SCHEMA `kursova2`  DEFAULT COLLATE utf8_unicode_ci ;
 
 -- -----------------------------------------------------
 -- Table `kursova`.`Users`
