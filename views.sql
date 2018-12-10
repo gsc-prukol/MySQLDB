@@ -2,7 +2,7 @@ USE kursova2;
 CREATE VIEW top5 AS 
     SELECT v.name AS name , count(*) AS count 
         FROM Videos v 
-        OIN usersHasVideo uHV 
+        JOIN UsersHasVideo uHV 
         USING(idVideo) 
         GROUP BY uHV.idVideo 
         ORDER BY count DESC
@@ -11,7 +11,7 @@ CREATE VIEW top5 AS
 CREATE VIEW top50 AS 
     SELECT v.name AS name , count(*) AS count 
         FROM Videos v 
-        OIN usersHasVideo uHV 
+        JOIN UsersHasVideo uHV 
         USING(idVideo) 
         GROUP BY uHV.idVideo 
         ORDER BY count DESC
