@@ -1,4 +1,4 @@
-USE kursova2;
+USE ka66_03;
 CREATE VIEW top5 AS 
     SELECT v.name AS name , count(*) AS count 
         FROM Videos v 

@@ -1,2 +1,2 @@
-use kursova2;
+use ka66_03;
 CALL insertUser('gsc_prukol', 'qwerty', 'Вова');
