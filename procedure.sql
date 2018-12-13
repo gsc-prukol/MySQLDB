@@ -1,136 +1,136 @@
 USE ka66_03;
 delimiter //
 
-CREATE PROCEDURE deleteOldLog(IN sTime DATETIME )
+CREATE PROCEDURE delete_old_log(IN stime DATETIME )
 BEGIN
     DELETE FROM log
-    WHERE time <= sTime;
+    WHERE time <= stime;
 END //
 
 
-CREATE PROCEDURE insertUser(IN plogin varchar(45),
-                            IN ppasswordHash VARCHAR(100),
+CREATE PROCEDURE insert_user(IN plogin varchar(45),
+                            IN ppassword_hash VARCHAR(100),
                             IN pname VARCHAR(45))
 BEGIN
-    INSERT INTO Users (login, passwordHash, name)
-    VALUE(plogin, ppasswordHash, pname);
+    INSERT INTO users (login, password_hash, name)
+    VALUE(plogin, ppassword_hash, pname);
 END //
 
-CREATE PROCEDURE updateUser(IN id INT UNSIGNED, 
+CREATE PROCEDURE update_user(IN id INT UNSIGNED, 
                             IN plogin varchar(45),
-                            IN ppasswordHash VARCHAR(100),
+                            IN ppassword_hash VARCHAR(100),
                             IN pname VARCHAR(45),
                             IN pstatus CHAR(1) )
 BEGIN 
-    UPDATE Users
-    SET login = plogin, ppasswordHash = passwordHash, name = pname, status = pstatus
-    WHERE idUser = id;
+    UPDATE users
+    SET login = plogin, ppassword_hash = password_hash, name = pname, status = pstatus
+    WHERE id_user = id;
 END //
 
-CREATE PROCEDURE updateUserLogin(IN id INT UNSIGNED, 
-                            IN plogin varchar(45))
+CREATE PROCEDURE update_user_login(IN id INT UNSIGNED, 
+                                   IN plogin varchar(45))
 BEGIN 
-    UPDATE Users
+    UPDATE users
     SET login = plogin
-    WHERE idUser = id;
+    WHERE id_user = id;
 END //
 
-CREATE PROCEDURE updateUserName(IN id INT UNSIGNED, 
+CREATE PROCEDURE update_user_name(IN id INT UNSIGNED, 
                             IN pname VARCHAR(45) )
 BEGIN 
-    UPDATE Users
+    UPDATE users
     SET name = pname
-    WHERE idUser = id;
+    WHERE id_user = id;
 END //
 
-CREATE PROCEDURE updateUserStatus(IN id INT UNSIGNED, 
+CREATE PROCEDURE update_user_status(IN id INT UNSIGNED, 
                                   IN pstaatus CHAR(1) )
 BEGIN 
-    UPDATE Users
+    UPDATE users
     SET status = pstatus
-    WHERE idUser = id;
+    WHERE id_user = id;
 END //
 
-CREATE PROCEDURE deleteUser(IN id INT UNSIGNED)
+CREATE PROCEDURE delete_user(IN id INT UNSIGNED)
 BEGIN
-    DELETE FROM Users
-    WHERE idUser = id;
+    DELETE FROM users
+    WHERE id_user = id;
 END //
 
 
-CREATE PROCEDURE insertVideo(IN pname varchar(200),
+CREATE PROCEDURE insert_video(IN pname varchar(200),
                              IN purl VARCHAR(200))
 BEGIN
-    INSERT INTO Videos (name, url)
+    INSERT INTO videos (name, url)
     VALUE(pname, purl);
 END //
 
-CREATE PROCEDURE updateVideo(IN id INT UNSIGNED,
+CREATE PROCEDURE update_video(IN id INT UNSIGNED,
                              IN pname varchar(200),
                              IN purl VARCHAR(200))
 BEGIN
-    UPDATE Videos 
+    UPDATE videos 
     SET name = pname, url = purl
-    WHERE idVideo = id;
+    WHERE id_video = id;
 END //
 
 CREATE PROCEDURE updateVideoName(IN id INT UNSIGNED,
                                  IN pname varchar(200))
 BEGIN
-    UPDATE Videos 
+    UPDATE videos 
     SET name = pname
-    WHERE idVideo = id;
+    WHERE id_video = id;
 END //
 
-CREATE PROCEDURE updateVideoUrl(IN id INT UNSIGNED,
+CREATE PROCEDURE update_video_url(IN id INT UNSIGNED,
                              IN purl VARCHAR(200))
 BEGIN
-    UPDATE Videos 
+    UPDATE videos 
     SET url = purl
-    WHERE idVideo = id;
+    WHERE id_video = id;
 END //
 
-CREATE PROCEDURE deleteVideo(IN id INT UNSIGNED)
+CREATE PROCEDURE delete_video(IN id INT UNSIGNED)
 BEGIN
-    DELETE FROM Videos
-    WHERE idVideo = id;
+    DELETE FROM videos
+    WHERE id_video = id;
 END //
 
 
-CREATE PROCEDURE insertGroup(IN pname CHAR(80))
+CREATE PROCEDURE insert_group(IN pname CHAR(80))
 BEGIN
-    INSERT INTO Groups (name)
+    INSERT INTO groups (name)
     VALUE(pname);
 END //
 
-CREATE PROCEDURE updateGroup(IN id INT UNSIGNED,
+CREATE PROCEDURE update_group(IN id INT UNSIGNED,
                              IN pname CHAR(80))
 BEGIN
-    UPDATE Groups
+    UPDATE groups
     SET name = pname
-    WHERE idVideo = id;
+    WHERE id_group = id;
 END //
 
-CREATE PROCEDURE updateGroupName(IN id INT UNSIGNED,
+CREATE PROCEDURE update_group_name(IN id INT UNSIGNED,
                              IN pname CHAR(80))
 BEGIN
-    UPDATE Groups
+    UPDATE groups
     SET name = pname
-    WHERE idVideo = id;
+    WHERE id_group = id;
 END //
 
-CREATE PROCEDURE deleteGroup(IN id INT UNSIGNED)
+CREATE PROCEDURE delete_group(IN id INT UNSIGNED)
 BEGIN
-    DELETE FROM Groups
-    WHERE idGroup = id;
+    DELETE FROM groups
+    WHERE id_group = id;
 END //
 
 --#################################################################
-CREATE PROCEDURE addVideoUser(IN sidUser INT UNSIGNED, 
-                              IN sidVideo INT UNSIGNED,
+CREATE PROCEDURE add_video_user(IN sid_user INT UNSIGNED, 
+                              IN sid_video INT UNSIGNED,
                               IN sstatus CHAR(1))
 BEGIN
-    INSERT INTO UsersHasVideo(idUser, idVideo, status)
-    VALUES(sidUsers, sidVideo, sstatus);
+    INSERT INTO UsersHasVideo(id_user, id_video, status)
+    VALUES(sid_users, sid_video, sstatus);
 END //
 delimiter ;
