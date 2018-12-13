@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `id_log` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `log_message` VARCHAR(200) NOT NULL,
   `table_name` VARCHAR(20) NOT NULL,
-  `id_rows_table` INT UNSIGNED NOT NULL,
+  `id_row_table` INT UNSIGNED NOT NULL,
   `action_type` CHAR(1) NOT NULL CHECK (`action_type` IN ('i', 'u', 'd')) , # insert, update, delete
   `time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_log`)
