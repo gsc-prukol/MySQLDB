@@ -19,10 +19,11 @@ END //
 CREATE PROCEDURE updateUser(IN id INT UNSIGNED, 
                             IN plogin varchar(45),
                             IN ppasswordHash VARCHAR(100),
-                            IN pname VARCHAR(45) )
+                            IN pname VARCHAR(45),
+                            IN pstatus CHAR(1) )
 BEGIN 
     UPDATE Users
-    SET login = plogin, ppasswordHash = passwordHash, name = pname
+    SET login = plogin, ppasswordHash = passwordHash, name = pname, status = pstatus
     WHERE idUser = id;
 END //
 
@@ -34,19 +35,19 @@ BEGIN
     WHERE idUser = id;
 END //
 
-CREATE PROCEDURE updateUserPasswordHash(IN id INT UNSIGNED, 
-                            IN ppasswordHash VARCHAR(100))
-BEGIN 
-    UPDATE Users
-    SET passwordHash = passwordHash
-    WHERE idUser = id;
-END //
-
 CREATE PROCEDURE updateUserName(IN id INT UNSIGNED, 
                             IN pname VARCHAR(45) )
 BEGIN 
     UPDATE Users
     SET name = pname
+    WHERE idUser = id;
+END //
+
+CREATE PROCEDURE updateUserStatus(IN id INT UNSIGNED, 
+                                  IN pstaatus CHAR(1) )
+BEGIN 
+    UPDATE Users
+    SET status = pstatus
     WHERE idUser = id;
 END //
 
@@ -58,22 +59,18 @@ END //
 
 
 CREATE PROCEDURE insertVideo(IN pname varchar(200),
-                             IN pduration TIME,
-                             IN prating TINYINT(4),
                              IN purl VARCHAR(200))
 BEGIN
-    INSERT INTO Videos (name, duration, rating, url)
-    VALUE(pname, pduration, prating, purl);
+    INSERT INTO Videos (name, url)
+    VALUE(pname, purl);
 END //
 
 CREATE PROCEDURE updateVideo(IN id INT UNSIGNED,
                              IN pname varchar(200),
-                             IN pduration TIME,
-                             IN prating TINYINT(4),
                              IN purl VARCHAR(200))
 BEGIN
     UPDATE Videos 
-    SET name = pname, duration = pduration, rating = prating, url = purl
+    SET name = pname, url = purl
     WHERE idVideo = id;
 END //
 
@@ -82,22 +79,6 @@ CREATE PROCEDURE updateVideoName(IN id INT UNSIGNED,
 BEGIN
     UPDATE Videos 
     SET name = pname
-    WHERE idVideo = id;
-END //
-
-CREATE PROCEDURE updateVideoDuration(IN id INT UNSIGNED,
-                                     IN pduration TIME)
-BEGIN
-    UPDATE Videos 
-    SET duration = pduration
-    WHERE idVideo = id;
-END //
-
-CREATE PROCEDURE updateVideoRating(IN id INT UNSIGNED,
-                             IN prating TINYINT(4))
-BEGIN
-    UPDATE Videos 
-    SET rating = prating
     WHERE idVideo = id;
 END //
 
@@ -116,19 +97,17 @@ BEGIN
 END //
 
 
-CREATE PROCEDURE insertGroup(IN pname CHAR(80),
-                             IN ptype CHAR(1))
+CREATE PROCEDURE insertGroup(IN pname CHAR(80))
 BEGIN
-    INSERT INTO Groups (name, type)
-    VALUE(pname, ptype);
+    INSERT INTO Groups (name)
+    VALUE(pname);
 END //
 
 CREATE PROCEDURE updateGroup(IN id INT UNSIGNED,
-                             IN pname CHAR(80),
-                             IN ptype CHAR(1))
+                             IN pname CHAR(80))
 BEGIN
     UPDATE Groups
-    SET name = pname, type = ptype
+    SET name = pname
     WHERE idVideo = id;
 END //
 
@@ -140,21 +119,13 @@ BEGIN
     WHERE idVideo = id;
 END //
 
-CREATE PROCEDURE updateGroupType(IN id INT UNSIGNED,
-                             IN ptype CHAR(1))
-BEGIN
-    UPDATE Groups
-    SET type = ptype
-    WHERE idVideo = id;
-END //
-
 CREATE PROCEDURE deleteGroup(IN id INT UNSIGNED)
 BEGIN
     DELETE FROM Groups
     WHERE idGroup = id;
 END //
 
-#################################################################
+--#################################################################
 CREATE PROCEDURE addVideoUser(IN sidUser INT UNSIGNED, 
                               IN sidVideo INT UNSIGNED,
                               IN sstatus CHAR(1))
