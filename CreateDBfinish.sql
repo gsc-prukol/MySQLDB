@@ -15,7 +15,7 @@
 -- Schema kursova
 -- -----------------------------------------------------
 #CREATE SCHEMA IF NOT EXISTS `kursova2` DEFAULT CHARACTER SET utf8;
-#USE `kursova2` ;
+#USE `ka66_03` ;
 ALTER SCHEMA `ka66_03`  DEFAULT COLLATE utf8_unicode_ci ;
 
 -- -----------------------------------------------------
@@ -49,9 +49,7 @@ CREATE TABLE IF NOT EXISTS `Videos` (
 CREATE TABLE IF NOT EXISTS `Groups` (
   `idGroup` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(80) NOT NULL,
-  `type` CHAR(1) NOT NULL,
-  PRIMARY KEY (`idGroup`),
-  CONSTRAINT `typeGroup` CHECK(`type` IN ('y', 'g', 'd', 'a', 'o')) # year, genre, director, actor, other
+  PRIMARY KEY (`idGroup`)
   ) ENGINE = InnoDB;
 
 
@@ -102,7 +100,3 @@ CREATE TABLE IF NOT EXISTS `Log` (
   PRIMARY KEY (`idLog`)
 ) ENGINE = InnoDB;
 
-
-#SET SQL_MODE=@OLD_SQL_MODE;
-#SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-#SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
