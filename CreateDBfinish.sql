@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `login` VARCHAR(45) NOT NULL UNIQUE,
   `passwordHash` VARCHAR(100) NOT NULL,
   `name` VARCHAR(45) NOT NULL DEFAULT "Користувач",
+  `status` CHAR(1) NOT NULL DEFAULT 'u' CHECK (`status` in 'a', 'm', 'u'), --admin, moderator, user
   PRIMARY KEY (`idUser`)
   ) ENGINE = InnoDB
 	PACK_KEYS = DEFAULT;
