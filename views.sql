@@ -6,7 +6,7 @@ DROP VIEW IF EXISTS rand5;
 CREATE VIEW top5 AS 
     SELECT v.name AS name , count(*) AS count, v.url as url 
         FROM videos v 
-        JOIN users_has_video uHV 
+        JOIN user_has_video uHV 
         USING(id_video) 
         GROUP BY uHV.id_video 
         ORDER BY count DESC
@@ -15,7 +15,7 @@ CREATE VIEW top5 AS
 CREATE VIEW top50 AS 
     SELECT v.name AS name , count(*) AS count, v.url as url 
         FROM videos v 
-        JOIN users_has_video uHV 
+        JOIN user_has_video uHV 
         USING(id_video) 
         GROUP BY uHV.id_video 
         ORDER BY count DESC
