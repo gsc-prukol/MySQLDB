@@ -32,3 +32,15 @@ CREATE VIEW rand50 AS
         FROM videos v
         ORDER BY rand() 
         LIMIT 50;
+
+    CREATE VIEW group50 AS 
+    SELECT g.name AS name, g.id_group as id_group 
+        FROM groups g
+        ORDER BY rand() 
+        LIMIT 50;
+
+CREATE VIEW video50 AS 
+    SELECT v.name AS name, v.url as url 
+        FROM videos v
+        ORDER BY id_video DESC
+        LIMIT 50;
