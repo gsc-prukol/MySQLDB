@@ -26,3 +26,9 @@ CREATE VIEW rand5 AS
         FROM videos v
         ORDER BY rand() 
         LIMIT 5;
+
+CREATE VIEW rand50 AS 
+    SELECT v.name AS name, v.url as url 
+        FROM videos v
+        ORDER BY rand() 
+        LIMIT 50;
