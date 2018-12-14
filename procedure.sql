@@ -44,7 +44,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE update_user_status(IN id INT UNSIGNED, 
-                                  IN pstaatus CHAR(1) )
+                                  IN pstatus CHAR(1) )
 BEGIN 
     UPDATE users
     SET status = pstatus
