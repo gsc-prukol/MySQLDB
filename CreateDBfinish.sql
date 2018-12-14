@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
 CREATE TABLE IF NOT EXISTS `user_has_video` (
   `id_user` INT UNSIGNED NOT NULL,
   `id_video` INT UNSIGNED NOT NULL,
-  `status` CHAR(1) NOT NULL,
+  `status` CHAR(1) NOT NULL DEFAULT 's',
   PRIMARY KEY (`id_user`, `id_video`),
   INDEX `fk_id_video` (`id_video` ASC),
   INDEX `fk_id_user` (`id_user` ASC),
