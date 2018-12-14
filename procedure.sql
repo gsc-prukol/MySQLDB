@@ -74,7 +74,7 @@ BEGIN
     WHERE id_video = id;
 END //
 
-CREATE PROCEDURE updateVideoName(IN id INT UNSIGNED,
+CREATE PROCEDURE update_video_name(IN id INT UNSIGNED,
                                  IN pname varchar(200))
 BEGIN
     UPDATE videos 
@@ -126,11 +126,19 @@ BEGIN
 END //
 
 --#################################################################
-CREATE PROCEDURE add_video_user(IN sid_user INT UNSIGNED, 
+CREATE PROCEDURE add_user_has_video(IN sid_user INT UNSIGNED, 
                               IN sid_video INT UNSIGNED,
                               IN sstatus CHAR(1))
 BEGIN
-    INSERT INTO UsersHasVideo(id_user, id_video, status)
+    INSERT INTO user_has_video(id_user, id_video, status)
     VALUES(sid_users, sid_video, sstatus);
+END //
+CREATE PROCEDURE update_user_has_video_status(IN sid_user INT UNSIGNED, 
+                              IN sid_video INT UNSIGNED,
+                              IN sstatus CHAR(1))
+BEGIN
+    UPDATE user_has_video
+    SET status = sstatus
+    WHERE id_user = sid_user AND id_video = sid_video;
 END //
 delimiter ;
