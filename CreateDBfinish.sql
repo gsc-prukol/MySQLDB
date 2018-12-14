@@ -89,6 +89,20 @@ CREATE TABLE IF NOT EXISTS `video_has_group` (
     FOREIGN KEY (`id_group`)
     REFERENCES `groups` (`id_group`)
     ) ENGINE = InnoDB;
+    
+CREATE TABLE IF NOT EXISTS `user_has_group` (
+  `id_user` INT UNSIGNED NOT NULL,
+  `id_group` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_user`, `id_group`),
+  INDEX `fk_id_group` (`id_group` ASC),
+  INDEX `fk_id_user` (`id_user` ASC),
+  CONSTRAINT `fk_id_video_UHG`
+    FOREIGN KEY (`id_user`)
+    REFERENCES `users` (`id_user`),
+  CONSTRAINT `fk_id_group_UHG`
+    FOREIGN KEY (`id_group`)
+    REFERENCES `groups` (`id_group`)
+    ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `log` (
   `id_log` INT UNSIGNED NOT NULL AUTO_INCREMENT,
