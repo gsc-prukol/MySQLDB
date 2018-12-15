@@ -44,5 +44,4 @@ CREATE VIEW group50 AS
 CREATE VIEW video50 AS 
     SELECT v.name AS name, v.url as url, v.id_video as id_video 
         FROM videos v
-        ORDER BY id_video DESC
-        LIMIT 50;
+        ORDER BY id_video DESC;
